@@ -36,7 +36,7 @@ function geFfuncList(){
 	$funclist = getBlankCatArr();
 	$_SESSION['funclist'] = $funclist;
     
-	$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
+	$DB = mysqli_connect("localhost", "root", "", "calgoric_web");
     if (!$DB) {
         //echo '<script type="text/javascript">alert("Connection error");</script>';
       $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";
@@ -79,7 +79,7 @@ function geFfuncList(){
 
 function getFuncData($f_name){
 	if (trim($f_name) != ""){
-		$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
+		$DB = mysqli_connect("localhost", "root", "", "calgoric_web");
 	    if (!$DB) {
 	        //echo '<script type="text/javascript">alert("Connection error");</script>';
 	      $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";
@@ -114,7 +114,7 @@ function getSearchData($serch_key){
 	$count = 0;
 	$serch_key = trim($serch_key);
 	if ($serch_key != ""){
-		$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
+		$DB = mysqli_connect("localhost", "root", "", "calgoric_web");
 	    if (!$DB) {
 	        //echo '<script type="text/javascript">alert("Connection error");</script>';
 	      $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";

@@ -4,7 +4,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 # Database credentials
 define("DB_SERVER", "localhost");
 define("DB_USERNAME", "root");
-define("DB_PASSWORD", "saikat12345");
+define("DB_PASSWORD", "");
 define("DB_NAME", "calgoric_web");
 define("DB_TBL_FUNC", "func_details");
 

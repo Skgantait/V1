@@ -22,7 +22,7 @@ if (file_exists($deasyMailPath)) {
 
 define("USER_SERVER", "localhost");
 define("USER_USERNAME", "root");
-define("USER_PASSWORD", "saikat12345");
+define("USER_PASSWORD", "");
 define("USER_NAME", "calgoric_help");
 
 
