@@ -66,7 +66,6 @@ function geFfuncList(){
 	            }
 	            $_SESSION['funclist']=$funclist;
 	            $funclist = '';
-           echo $_SESSION['funclist'];
 	        }
 	        mysqli_free_result($crslt);
 	    }
