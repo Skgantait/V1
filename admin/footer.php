@@ -12,18 +12,18 @@
                 <script src="js/lightbox.min.js"></script>
                 <script src="js/site.js"></script>
 
-                <script src="js/js/funcmain.js"></script>
-                <script src="js/js/collapsible-menu.js"></script>
+                <script src="js/js/funcmain.js?v=20260411b"></script>
+                <script src="js/js/collapsible-menu.js?v=20260411b"></script>
                 <script src="js/mathscribe/jqmath-etc-0.4.6.min.js"></script>
                 <script src="js/js/CodeStyler.js"></script>
 
                 <script src="js/prompt-boxes.js"></script>
 
                 <script src="js/cred.js"></script>
-                <script src="js/DeasyDataHandle.js"></script>
-                <script src="js/DeasyPostGet.js"></script>
+                <script src="js/DeasyDataHandle.js?v=20260411"></script>
+                <script src="js/DeasyPostGet.js?v=20260411"></script>
                 <script src="js/FileUpload.js"></script>
-                <script src="js/calgoricadmin.js"></script>
+                <script src="js/calgoricadmin.js?v=20260411"></script>
 
 
 

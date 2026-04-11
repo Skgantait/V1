@@ -441,6 +441,15 @@ button {
 .collapsible-menu > li > ul ul a {
     padding-left: 20px;
 }
+
+/* Emergency visibility override for Statistics submenu */
+.collapsible-menu > li > ul.stats-always-open {
+  display: block !important;
+}
+
+.collapsible-menu > li > ul.stats-always-open > li {
+  display: list-item !important;
+}
 /*
 .collapsible-menu .footer {
     border-bottom: 10px solid #e8e8e8;

@@ -41,18 +41,21 @@ var pb = new PromptBoxes({
                       }
                     });
 
-                    document.getElementById('pb-prompt').onclick = function () {
-                      pb.prompt(
-                        function (value) {
-                          alert('You have: ' + (value ? 'entered ' + value : 'cancelled'));
-                        },
-                        'This is an example prompt',
-                        'textarea',
-                        'Default Text',
-                        'Submit',
-                        'Cancel'
-                      );
-                    }
+                                        var pbPromptButton = document.getElementById('pb-prompt');
+                                        if (pbPromptButton) {
+                                            pbPromptButton.onclick = function () {
+                                                pb.prompt(
+                                                    function (value) {
+                                                        alert('You have: ' + (value ? 'entered ' + value : 'cancelled'));
+                                                    },
+                                                    'This is an example prompt',
+                                                    'textarea',
+                                                    'Default Text',
+                                                    'Submit',
+                                                    'Cancel'
+                                                );
+                                            }
+                                        }
 
 
 
@@ -380,7 +383,7 @@ function sleep(ms) {
 function insertPost(){
     ////console.log(JSON.stringify(func_details));
     //setCookie('func_details',makePostArray());
-     //var str = 'http://localhost/Calgoric/MyWork/0/opws/php/admin/index.php?update=func_details';
+     //var str = 'http://calgo/Calgoric/MyWork/0/opws/php/admin/index.php?update=func_details';
      //alert("HI");
      //window.location.href = str;
     //console.log(func_details);
@@ -388,7 +391,7 @@ function insertPost(){
 
     //var tmp = JSON.stringify(makePostArray());
     //console.log(tmp);
-    var purl = mainURL +  'admin/post.php';
+    var purl = mainURL +  'post.php';
 
     //ClientPost(purl, makePostArray(), true, 'json',  (res) => {
 
@@ -414,7 +417,7 @@ function insertPost(){
                         alert(res.message);
                         //alert(res.response);
                         //await  sleep(5000);
-                        //var str = 'http://localhost/Calgoric/MyWork/0/opws/php/admin/index.php';
+                        //var str = 'http://calgo/Calgoric/MyWork/0/opws/php/admin/index.php';
                         //window.location.href = str;
                     }
                     //if (res.Error === '') {
@@ -430,7 +433,7 @@ function insertPost(){
 }
 
 function updatePost(){
- var purl = mainURL + 'admin/update.php';
+ var purl = mainURL + 'update.php';
 
     //ClientPost(purl, makePostArray(), true, 'json',  (res) => {
 
@@ -451,7 +454,7 @@ function updatePost(){
                         alert(res.message);
                         //alert(res.response);
                         //await  sleep(5000);
-                        //var str = 'http://localhost/Calgoric/MyWork/0/opws/php/admin/index.php';
+                        //var str = 'http://calgo/Calgoric/MyWork/0/opws/php/admin/index.php';
                         //window.location.href = str;
                     }
                     //if (res.Error === '') {
@@ -472,7 +475,7 @@ function updatePost(){
 
             let File = HtmlToFiles(img);// Javascript File object Deasy FileObj, it is may be an array of File object.
             //console.log('HtmlToFiles', File);
-            var url = mainURL + 'admin/FileUpload.php';
+            var url = mainURL + 'FileUpload.php';
             UploadFile(url, File, (res) => {
                  //
                 //res = 

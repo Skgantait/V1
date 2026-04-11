@@ -36,7 +36,7 @@ function geFfuncList(){
 	$funclist = getBlankCatArr();
 	$_SESSION['funclist'] = $funclist;
     
-	$DB = @mysqli_connect("calgo", "root", "", "calgoric_web");
+	$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
     if (!$DB) {
         //echo '<script type="text/javascript">alert("Connection error");</script>';
       $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";
@@ -79,7 +79,7 @@ function geFfuncList(){
 
 function getFuncData($f_name){
 	if (trim($f_name) != ""){
-		$DB = @mysqli_connect("calgo", "root", "", "calgoric_web");
+		$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
 	    if (!$DB) {
 	        //echo '<script type="text/javascript">alert("Connection error");</script>';
 	      $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";
@@ -112,30 +112,46 @@ function getFuncData($f_name){
 
 function getSearchData($serch_key){
 	$count = 0;
-	if (trim($serch_key) != ""){
-		$DB = @mysqli_connect("calgo", "root", "", "calgoric_web");
+	$serch_key = trim($serch_key);
+	if ($serch_key != ""){
+		$DB = mysqli_connect("localhost", "root", "saikat12345", "calgoric_web");
 	    if (!$DB) {
 	        //echo '<script type="text/javascript">alert("Connection error");</script>';
 	      $msg = "<script> alert('Connection error: " . mysqli_connect_error() . "') </script>";
 	      echo $msg;
 	  	} else {
-	  		if (trim($serch_key) == "All"){
+	  		$_SESSION['search'] = array();
+
+	  		if ($serch_key == "All"){
 		 		$sql = "SELECT name_val, main_categori, sort_description FROM func_details ORDER BY name_val";
 		 	} else{
-		 		$sql = "SELECT name_val, main_categori, sort_description FROM func_details WHERE (name_val Like '" . $serch_key ."%' Or main_categori Like '" . $serch_key ."%' Or sort_description Like '%" . $serch_key ."%')";
+		 		$esc_key = mysqli_real_escape_string($DB, $serch_key);
+		 		$is_known_category = array_key_exists($serch_key, getBlankCatArr());
+
+		 		if ($is_known_category) {
+		 			$sql = "SELECT name_val, main_categori, sort_description FROM func_details WHERE (main_categori = '" . $esc_key ."' OR name_val Like '" . $esc_key ."%') ORDER BY name_val";
+		 		} elseif (strlen($serch_key) < 3) {
+		 			$sql = "SELECT name_val, main_categori, sort_description FROM func_details WHERE (name_val Like '" . $esc_key ."%' OR main_categori Like '" . $esc_key ."%') ORDER BY name_val";
+		 		} else {
+		 			$sql = "SELECT name_val, main_categori, sort_description FROM func_details WHERE (name_val Like '" . $esc_key ."%' OR main_categori Like '" . $esc_key ."%' OR sort_description Like '%" . $esc_key ."%') ORDER BY name_val";
+		 		}
 		 	}
 
 
-	    	if ($rslt = mysqli_query($DB, $sql)) {
+	    	$rslt = mysqli_query($DB, $sql);
+	    	if ($rslt) {
 	        	$count = mysqli_num_rows($rslt);
 	        	if ($count > 0) {
 	            	//$rows = mysqli_fetch_all($rslt, MYSQLI_ASSOC);
 	            	 $_SESSION['search'] = mysqli_fetch_all($rslt, MYSQLI_ASSOC);
 	        	}
+
+	        	# Free result set
+	        	mysqli_free_result($rslt);
 	        }
 
-	        # Free result set
-	        mysqli_free_result($rslt);
+	        # Close connection
+	        mysqli_close($DB);
 	    }
 	}
 	if ($count < 0){

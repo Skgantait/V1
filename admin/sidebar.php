@@ -1,4 +1,3 @@
-<?php echo $_SESSION['funclist']; ?>
  <nav class="sidebar" id="sidebar">
             <button class="menu__toggle" id="menu-toggle">
                 <i class="ri-menu-line"></i>
@@ -218,13 +217,13 @@
 
                             <li>
                                 <a class="sidebar__title collapsed sidebar__link"><img src="images/func/stat2.png" width="14" height="14" title="Statistics"><span>Statistics</span></a>
-                                <ul> 
+                                <div class="stats-always-open" style="display:block !important; padding: 0 0 0 36px; margin: 6px 0 14px 0;"> 
                                     <?php
                                         for ($i=0 ; $i<count($_SESSION['funclist']['Statistics'],0); $i++){
-                                            echo '<li><a href="javascript:"  onclick="funcpost(\''. $_SESSION['funclist']['Statistics'][$i] . '\')" class="sidebar__link"><i class="ri-arrow-drop-right-fill"></i>'.$_SESSION['funclist']['Statistics'][$i].'</a></li>';
+                                            echo '<a href="javascript:" onclick="funcpost(\''. $_SESSION['funclist']['Statistics'][$i] . '\')" style="display:block; color:#333; font-size:12px; line-height:18px; margin: 2px 0;"><i class="ri-arrow-drop-right-fill"></i>'.$_SESSION['funclist']['Statistics'][$i].'</a>';
                                         }
                                     ?>
-                                </ul>
+                                </div>
                             </li>
 
 

@@ -11,9 +11,9 @@ require_once('calgadmindb.php');
 
 
 $recToken = null;
-$headers = getallheaders();  //Get all header information 
-if (isset($headers['DataType']) && !empty($headers['DataType'])) {
-    $recToken = trim($headers['DataType']);
+$headers = array_change_key_case(getallheaders(), CASE_LOWER);
+if (isset($headers['datatype']) && !empty($headers['datatype'])) {
+    $recToken = trim($headers['datatype']);
 }
 
 if ($recToken === null){
