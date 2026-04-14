@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.angular": true,
+    "**/package-lock.json": true,
+    "**/.vscode": true,
+    "**/out-tsc": true
+  }
+}

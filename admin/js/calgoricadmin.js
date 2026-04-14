@@ -391,13 +391,7 @@ function insertPost(){
 
     //var tmp = JSON.stringify(makePostArray());
     //console.log(tmp);
-    var purl = mainURL +  'post.php';
-
-    //ClientPost(purl, makePostArray(), true, 'json',  (res) => {
-
-    //DataSendServer(purl, makePostArray(), 'post', false, false, true, (res) => {
-    //console.log(JSON.stringify(makePostArray()));
-    
+    var purl = mainURL + 'api/func';
 
     ClientPostJson(purl, makePostArray(), (res) => {
                     if (res.error){
@@ -433,13 +427,15 @@ function insertPost(){
 }
 
 function updatePost(){
- var purl = mainURL + 'update.php';
+    var purl = mainURL + 'api/func';
 
-    //ClientPost(purl, makePostArray(), true, 'json',  (res) => {
-
-    //DataSendServer(purl, makePostArray(), 'post', false, false, true, (res) => {
-
-    ClientPostJson(purl, makePostArray(), (res) => {
+    fetch(purl, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(makePostArray())
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res) {
                     if (res.error){
                         console.log(res.message, res.error);
                         alert(res.message);
@@ -475,7 +471,7 @@ function updatePost(){
 
             let File = HtmlToFiles(img);// Javascript File object Deasy FileObj, it is may be an array of File object.
             //console.log('HtmlToFiles', File);
-            var url = mainURL + 'FileUpload.php';
+            var url = mainURL + 'api/upload';
             UploadFile(url, File, (res) => {
                  //
                 //res = 
@@ -498,7 +494,9 @@ function updatePost(){
                     var tcd = '<div class="imgcont">\n<h4>Put your Image Header..</h4>\n<hr>\n<img src="' + imgpath + '"></div>';
 
                     console.log('SUCCESS',res.response['UploadFile']);
-                    navigator.clipboard.writeText(tcd);
+                    if (typeof appendToHtmlEditor === 'function') appendToHtmlEditor(tcd);
+                    if (typeof copyTextToClipboard === 'function') copyTextToClipboard(tcd);
+                    else if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(tcd);
                     alert('SUCCESS: Successfully uploaded image in ' + imgpath);
                                 
                 }

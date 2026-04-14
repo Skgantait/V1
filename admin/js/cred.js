@@ -1,1 +1,1 @@
-const mainURL = 'http://localhost/admin/';
+const mainURL = 'http://localhost:3200/';
