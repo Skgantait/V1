@@ -1,6 +1,7 @@
 "use strict";
 
-$(document).ready(function () {
+/* Wait for Angular to render #header before initializing jQuery plugins */
+function initSitePlugins() {
 	/* Video Lightbox */
 	if (!!$.prototype.simpleLightboxVideo) {
 		$('.video').simpleLightboxVideo();
@@ -31,20 +32,31 @@ $(document).ready(function () {
 		}
 	});
 
-	/* Sticky Navigation */
-	if (!!$.prototype.stickyNavbar) {
-		$('#header').stickyNavbar();
+	if (document.getElementById('content') && !!$.prototype.waypoint) {
+		$('#content').waypoint(function (direction) {
+			if (direction === 'down') {
+				$('#header').addClass('nav-solid fadeInDown');
+			}
+			else {
+				$('#header').removeClass('nav-solid fadeInDown');
+			}
+		});
 	}
+}
 
-	$('#content').waypoint(function (direction) {
-		if (direction === 'down') {
-			$('#header').addClass('nav-solid fadeInDown');
-		}
-		else {
-			$('#header').removeClass('nav-solid fadeInDown');
-		}
-	});
-
+$(document).ready(function () {
+	/* Angular renders <app-root> content async — wait for #header to appear */
+	if (document.getElementById('header')) {
+		initSitePlugins();
+	} else {
+		var observer = new MutationObserver(function (mutations, obs) {
+			if (document.getElementById('header')) {
+				obs.disconnect();
+				initSitePlugins();
+			}
+		});
+		observer.observe(document.body, { childList: true, subtree: true });
+	}
 });
 
 

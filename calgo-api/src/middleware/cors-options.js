@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:4200,http://localhost:3200')
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3200')
   .split(',')
   .map(origin => origin.trim())
   .filter(Boolean);

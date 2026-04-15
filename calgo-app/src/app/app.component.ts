@@ -10,4 +10,8 @@ import { FuncbodyComponent } from './function-editor/funcbody.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {}
+export class AppComponent {
+  openMathTool(): void {
+    window.open('mathscribe/jqMath.html', '_blank');
+  }
+}

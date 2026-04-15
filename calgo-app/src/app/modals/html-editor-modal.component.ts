@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FuncService } from '../../services/func.service';
+import { FuncService, UploadResponse } from '../services/func.service';
 
 @Component({
   selector: 'app-html-editor-modal',
@@ -103,7 +103,7 @@ export class HtmlEditorModalComponent {
     if (!file) return;
 
     this.funcService.uploadImage(file).subscribe({
-      next: (res) => {
+      next: (res: UploadResponse) => {
         if (res.error || !res.response?.UploadFile?.length) {
           alert(res.message || 'Upload failed');
           return;

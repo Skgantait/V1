@@ -19,7 +19,7 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static admin files
+// Serve static admin files (includes Angular build in sidebar-dist/)
 const adminDir = path.resolve(__dirname, '..', 'admin');
 app.use('/admin', express.static(adminDir));
 app.use('/upload', express.static(uploadDir));
@@ -40,8 +40,8 @@ const server = app.listen(PORT, () => {
   console.log(`============================================`);
   console.log(`  Calgoric Admin Server (Node/Express)`);
   console.log(`============================================`);
-  console.log(`  Admin UI:  http://localhost:${PORT}/admin/`);
-  console.log(`  API:       http://localhost:${PORT}/api`);
+  console.log(`  Site:  http://localhost:${PORT}/admin/`);
+  console.log(`  API:   http://localhost:${PORT}/api`);
   console.log(`============================================`);
 });
 

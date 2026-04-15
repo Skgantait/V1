@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="css/CodeStyler.css">
     <link rel="stylesheet" type="text/css" href="css/prompt-boxes.css">
 
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
     <style type="text/css">
 .modal {
   display: none;
@@ -103,15 +101,6 @@
 }
     </style>
 
-    <script>
-        $(document).ready(function () {
-            $('.collapsible-menu').data('collapsible-menu');
-            var anchors = $('.collapsible-menu a.expanded');
-            if (anchors.length > 1) {
-                anchors.not(anchors[0]).removeClass('expanded').addClass('collapsed').find('+ ul').slideUp('medium');
-            }
-        });
-    </script>
 </head>
 <body>
     <!-- Preloader -->
@@ -128,383 +117,28 @@
         <div class="left-border wow fadeInLeft animated"></div>
     </div>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-    <input type="file" id="file" name="file" style="display: none;" onChange="imgupload()">
-
-      <div id="content1" class="modal-content">
-        <h3>main_categori</h3>
-        <input type="hidden" id="custId" value="">
-        <select name="cars" id="cat" onchange="insrt(this)">
-            <option value="Binary & Memory">Binary &amp; Memory</option>
-            <option value="Data Function">Data Function</option>
-            <option value="Database Functions">Database Functions</option>
-            <option value="Date & Time">Date &amp; Time</option>
-            <option value="Files & Folders">Files &amp; Folders</option>
-            <option value="Finance">Finance</option>
-            <option value="Geometry">Geometry</option>
-            <option value="Image Processing">Image Processing</option>
-            <option value="Integration">Integration</option>
-            <option value="IO">IO</option>
-            <option value="Linear Algebra">Linear Algebra</option>
-            <option value="Machine Learning">Machine Learning</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Matrix Operation">Matrix Operation</option>
-            <option value="Optimization & Equation Solver">Optimization &amp; Equation Solver</option>
-            <option value="Others">Others</option>
-            <option value="Polynomial & BSpline">Polynomial &amp; BSpline</option>
-            <option value="Regression">Regression</option>
-            <option value="Signal Processing">Signal Processing</option>
-            <option value="Statistics">Statistics</option>
-            <option value="String">String</option>
-            <option value="Syntax">Syntax</option>
-            <option value="System Info">System Info</option>
-            <option value="Table & Field">Table &amp; Field</option>
-        </select>
-        <a href="javascript:" class="button2" style="margin-right: 30px; margin-left: 30px;" onclick="mclose()">Cancel</a>
-        <a href="javascript:" class="button2" onclick="mcontent()">ok</a>
-      </div>
-
-      <div id="content2" class="modal-content">
-        <h3>Variable Type</h3>
-        <fieldset class="hscroll">
-            <div><input type="checkbox" id="DoubleScaler" name="Object" class="dObject" value="Double Scaler"/><label for="DoubleScaler">Double Scaler</label></div>
-            <div><input type="checkbox" id="ComplexScaler" name="Object" class="dObject" value="Complex Scaler"/><label for="ComplexScaler">Complex Scaler</label></div>
-            <div><input type="checkbox" id="NumericScaler" name="Object" class="dObject" value="Numeric Scaler"/><label for="NumericScaler">Numeric Scaler</label></div>
-            <div><input type="checkbox" id="DateTime" name="Object" class="dObject" value="DateTime"/><label for="DateTime">Date &amp; Time</label></div>
-            <div><input type="checkbox" id="String" name="Object" class="dObject" value="String"/><label for="String">String</label></div>
-            <div><input type="checkbox" id="Logical" name="Object" class="dObject" value="Logical"/><label for="Logical">Logical</label></div>
-            <div><input type="checkbox" id="IntegerScaler" name="Object" class="dObject" value="Integer Scaler"/><label for="IntegerScaler">Integer Scaler</label></div>
-            <div><input type="checkbox" id="ByteScaler" name="Object" class="dObject" value="Byte Scaler"/><label for="ByteScaler">Byte Scaler</label></div>
-            <div><input type="checkbox" id="DoubleMatrix" name="Object" class="dObject" value="Double Matrix"/><label for="DoubleMatrix">Double Matrix</label></div>
-            <div><input type="checkbox" id="ComplexMatrix" name="Object" class="dObject" value="Complex Matrix"/><label for="ComplexMatrix">Complex Matrix</label></div>
-            <div><input type="checkbox" id="NumericMatrix" name="Object" class="dObject" value="Numeric Matrix"/><label for="NumericMatrix">Numeric Matrix</label></div>
-            <div><input type="checkbox" id="LogicalMatrix" name="Object" class="dObject" value="Logical Matrix"/><label for="LogicalMatrix">Logical Matrix</label></div>
-            <div><input type="checkbox" id="IntegerMatrix" name="Object" class="dObject" value="Integer Matrix"/><label for="IntegerMatrix">Integer Matrix</label></div>
-            <div><input type="checkbox" id="ByteMatrix" name="Object" class="dObject" value="Byte Matrix"/><label for="ByteMatrix">Byte Matrix</label></div>
-            <div><input type="checkbox" id="DoubleField" name="Object" class="dObject" value="Double Field"/><label for="DoubleField">Double Field</label></div>
-            <div><input type="checkbox" id="ComplexField" name="Object" class="dObject" value="Complex Field"/><label for="ComplexField">Complex Field</label></div>
-            <div><input type="checkbox" id="NumericField" name="Object" class="dObject" value="Numeric Field"/><label for="NumericField">Numeric Field</label></div>
-            <div><input type="checkbox" id="DateTimeField" name="Object" class="dObject" value="DateTime Field"/><label for="DateTimeField">Date &amp; Time Field</label></div>
-            <div><input type="checkbox" id="StringField" name="Object" class="dObject" value="String Field"/><label for="StringField">String Field</label></div>
-            <div><input type="checkbox" id="LogicalField" name="Object" class="dObject" value="Logical Field"/><label for="LogicalField">Logical Field</label></div>
-            <div><input type="checkbox" id="IntegerField" name="Object" class="dObject" value="Integer Field"/><label for="IntegerField">Integer Field</label></div>
-            <div><input type="checkbox" id="ByteField" name="Object" class="dObject" value="Byte Field"/><label for="ByteField">Byte Field</label></div>
-            <div><input type="checkbox" id="DoubleTable" name="Object" class="dObject" value="Double Table"/><label for="DoubleTable">Double Table</label></div>
-            <div><input type="checkbox" id="ComplexTable" name="Object" class="dObject" value="Complex Table"/><label for="ComplexTable">Complex Table</label></div>
-            <div><input type="checkbox" id="NumericTable" name="Object" class="dObject" value="Numeric Table"/><label for="NumericTable">Numeric Table</label></div>
-            <div><input type="checkbox" id="DateTimeTable" name="Object" class="dObject" value="DateTime Table"/><label for="DateTimeTable">Date &amp; Time Table</label></div>
-            <div><input type="checkbox" id="StringTable" name="Object" class="dObject" value="String Table"/><label for="StringTable">String Table</label></div>
-            <div><input type="checkbox" id="LogicalTable" name="Object" class="dObject" value="Logical Table"/><label for="LogicalTable">Logical Table</label></div>
-            <div><input type="checkbox" id="IntegerTable" name="Object" class="dObject" value="Integer Table"/><label for="IntegerTable">Integer Table</label></div>
-            <div><input type="checkbox" id="ByteTable" name="Object" class="dObject" value="Byte Table"/><label for="ByteTable">Byte Table</label></div>
-            <div><input type="checkbox" id="DoubleMatrixArray" name="Object" class="dObject" value="Double Matrix Array"/><label for="DoubleMatrixArray">Double Matrix Array</label></div>
-            <div><input type="checkbox" id="ComplexMatrixArray" name="Object" class="dObject" value="Complex Matrix Array"/><label for="ComplexMatrixArray">Complex Matrix Array</label></div>
-            <div><input type="checkbox" id="NumericMatrixArray" name="Object" class="dObject" value="Numeric Matrix Array"/><label for="NumericMatrixArray">Numeric Matrix Array</label></div>
-            <div><input type="checkbox" id="LogicalMatrixArray" name="Object" class="dObject" value="Logical Matrix Array"/><label for="LogicalMatrixArray">Logical Matrix Array</label></div>
-            <div><input type="checkbox" id="IntegerMatrixArray" name="Object" class="dObject" value="Integer Matrix Array"/><label for="IntegerMatrixArray">Integer Matrix Array</label></div>
-            <div><input type="checkbox" id="ByteMatrixArray" name="Object" class="dObject" value="Byte Matrix Array"/><label for="ByteMatrixArray">Byte Matrix Array</label></div>
-        </fieldset>
-        <a href="javascript:" class="button2" style="margin-right: 30px; margin-left: 30px;" onclick="mclose()">Cancel</a>
-        <a href="javascript:" class="button2" onclick="mdata()">ok</a>
-      </div>
-
-      <div id="content3" class="modal-content" style="width: 700px;">
-        <h5 id="htmledtr">HTML EDITOR</h5>
-        <p style="font-size: 14px; color: #BDBDBD;">Click a tool from toolbar and the appropriate code copy in to your clipboard.</p>
-        <ul class="ulm">
-            <li class="lim"><a title="Code" href="javascript:" onclick="toolsclick('code')">&#60&#47&#62</a></li>
-            <li class="lim"><a title="Div" href="javascript:" onclick="toolsclick('div')">&#60div&#62</a></li>
-            <li class="lim"><a title="P" href="javascript:" onclick="toolsclick('p')">&#60p&#62</a></li>
-            <li class="lim"><a title="H3" href="javascript:" onclick="toolsclick('h3')">&#60h3&#62</a></li>
-            <li class="lim"><a title="List" href="javascript:" onclick="toolsclick('list')">&#60L&#62</a></li>
-            <li class="lim"><a title="H-Link" href="javascript:" onclick="toolsclick('link')">&#60a&#62</a></li>
-            <li class="lim"><a title="Image" href="javascript:" onclick="imgclick()">&#60img&#62</a></li>
-            <div class="dropdown">
-                <button title="Table" onclick="dropdowntoggle()" class="dropbtn">&#60Table&#62</button>
-            </div>
-        </ul>
-        <div id="myDropdown" class="dropdown-content">
-            <input type="text" id="tablecol" name="" placeholder="Cols" style="width:60px">
-            <input type="text" id="tablerow" name="" placeholder="Rows" style="width:60px">
-            <a href="javascript:" class="button2" onclick="tableclick()">GetTable</a>
-        </div>
-        <div class="row clearfix" style="text-align: center; margin: 0px; padding: 0px;">
-            <textarea id="w3review" name="w3review" style="width:100%; height: 300px"></textarea>
-        </div>
-        <a href="javascript:" class="button2" style="margin-right: 30px; margin-left: 30px;" onclick="mclose()">Cancel</a>
-        <a href="javascript:" class="button2" onclick="hdata()">ok</a>
-      </div>
-    </div>
-    <!-- End Modal -->
-
     <div id="wrapper">
-       <!--=============== SIDEBAR (Angular) ===============-->
+       <!--=============== ANGULAR APP ===============-->
        <app-root></app-root>
-       <script src="sidebar-dist/main.js" defer></script>
-       <!--===============END SIDEBAR ===============-->
+       <script src="sidebar-dist/main.js" type="module"></script>
+       <!--=============== END ANGULAR APP ===============-->
 
-        <div id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
-            <div id="header" class="nav-collapse">
-                <div class="row clearfix">
-                    <div class="col-1">
-                        <div id="logo">
-                            <a href="javascript:" onclick="opensite()"><img src="images/logo.png" id="banner-logo" alt="Landing Page"/></a>
-                            <a href="javascript:" onclick="opensite()"><img src="images/logo.png" id="navigation-logo" alt="Landing Page"/></a>
-                        </div>
-                        <aside style="padding: 0px">
-                            <ul class="social-icons">
-                                <li>
-                                    <a title="Math-Equation" href="javascript:" onclick="window.open('mathscribe/jqMath.html', '_blank').focus()" style="color:grey; font-size: 20px;"><i class="fa fa-code" aria-hidden="true"></i></a>
-                                </li>
-                            </ul>
-                        </aside>
-                        <nav id="nav-main">
-                            <ul>
-                                <li><a href="javascript:" onclick="createNew()">Add-Function</a></li>
-                                <li><a href="javascript:" onclick="window.location.href='index.html?srch=All'">All-Functions</a></li>
-                            </ul>
-                        </nav>
-                        <div id="nav-trigger"><span></span></div>
-                        <nav id="nav-mobile"></nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <main class="main container" id="content">
-            <app-search></app-search>
-            <app-funcbody></app-funcbody>
-
-            <footer id="landing-footer" class="clearfix">
-                <script src="js/jquery.1.8.3.min.js"></script>
-                <script src="js/wow.min.js"></script>
-                <script src="js/featherlight.min.js"></script>
-                <script src="js/featherlight.gallery.min.js"></script>
-                <script src="js/jquery.enllax.min.js"></script>
-                <script src="js/jquery.scrollUp.min.js"></script>
-                <script src="js/jquery.easing.min.js"></script>
-                <script src="js/jquery.stickyNavbar.min.js"></script>
-                <script src="js/jquery.waypoints.min.js"></script>
-                <script src="js/images-loaded.min.js"></script>
-                <script src="js/lightbox.min.js"></script>
-                <script src="js/site.js"></script>
-                <script src="js/js/funcmain.js?v=20260411b"></script>
-                <script src="js/js/collapsible-menu.js?v=20260411b"></script>
-                <script src="js/mathscribe/jqmath-etc-0.4.6.min.js"></script>
-                <script src="js/js/CodeStyler.js"></script>
-                <script src="js/prompt-boxes.js"></script>
-                <script src="js/cred.js"></script>
-                <script src="js/DeasyDataHandle.js?v=20260411"></script>
-                <script src="js/DeasyPostGet.js?v=20260411"></script>
-                <script src="js/FileUpload.js"></script>
-                <script src="js/calgoricadmin.js?v=20260411"></script>
-
-<script type="text/javascript">
-    function search(){
-        if (document.getElementById("search").value != ""){
-            var str = "index.html?srch=" + document.getElementById("search").value;
-            window.location.href = str;
-        }
-    }
-
-    function funcpost(s){
-        var strtw = "index.html?fnm=" + s;
-        window.location.href = strtw;
-    }
-
-    function createNew(){
-        var strtw = "index.html";
-        window.location.href = strtw;
-    }
-
-    //=========MODAL SECTION==========
-    var modal = document.getElementById("myModal");
-    var content1 = document.getElementById("content1");
-    var content2 = document.getElementById("content2");
-    var content3 = document.getElementById("content3");
-
-    function insrt(e){
-        document.getElementById("custId").value = e.options[e.selectedIndex].innerHTML;
-    }
-
-    function getCategory(){
-        modal.style.display = "block";
-        content1.style.display = "block";
-        var tmp = document.getElementById("main-categori").innerHTML;
-        for (var option of document.getElementById("cat").options) {
-            if (option.value == tmp) { option.selected = true; break; }
-        }
-        document.getElementById("custId").value = document.getElementById("main-categori").innerHTML;
-    }
-
-    function mcontent(){
-        content1.style.display = "none";
-        modal.style.display = "none";
-        document.getElementById("main-categori").innerHTML = document.getElementById("custId").value;
-    }
-
-    function getBlankData(){
-        var dobjectarr = {};
-        var keys = ['DoubleScaler','ComplexScaler','NumericScaler','DateTime','String','Logical','IntegerScaler','ByteScaler','DoubleMatrix','ComplexMatrix','NumericMatrix','LogicalMatrix','IntegerMatrix','ByteMatrix','DoubleField','ComplexField','NumericField','DateTimeField','StringField','LogicalField','IntegerField','ByteField','DoubleTable','ComplexTable','NumericTable','DateTimeTable','StringTable','LogicalTable','IntegerTable','ByteTable','DoubleMatrixArray','ComplexMatrixArray','NumericMatrixArray','LogicalMatrixArray','IntegerMatrixArray','ByteMatrixArray'];
-        keys.forEach(function(k){ dobjectarr[k] = ''; });
-        return dobjectarr;
-    }
-
-    var newData = {};
-    var objc;
-    var dObject = document.getElementsByClassName('dObject');
-    for (var i = 0; i < dObject.length; i++){
-        dObject[i].addEventListener('click', function (event) {
-            if (event.target.checked){ newData[event.target.id] = event.target.value; }
-            else { newData[event.target.id] = ''; }
-        });
-    }
-
-    function getData(e){
-        objc = e;
-        newData = getBlankData();
-        var ptxt = e.innerHTML;
-        var parr = ptxt.split(' | ');
-        parr[0] = parr[0].split(': ')[1];
-        for (var i = 0; i < dObject.length; i++){ dObject[i].checked = false; }
-        for (var j = 0; j < parr.length; j++){
-            for (var i = 0; i < dObject.length; i++){
-                if (parr[j] == dObject[i].value){ dObject[i].checked = true; newData[dObject[i].id] = dObject[i].value; break; }
-            }
-        }
-        modal.style.display = "block";
-        content2.style.display = "block";
-    }
-
-    function mdata(){
-        var str = "";
-        for (var name in newData) {
-            if (newData[name] != ""){
-                if (str == ""){ str = newData[name]; }
-                else { str = str + ' | ' + newData[name]; }
-            }
-        }
-        objc.innerHTML = "Data Types: " + str;
-        newData = {};
-        content2.style.display = "none";
-        modal.style.display = "none";
-    }
-
-    function dropdowntoggle(src) {
-        if (src === undefined) src = true;
-        var x = document.getElementById("myDropdown");
-        if (x.className.indexOf("show") == -1) { if (src == true){ x.className += "show"; } }
-        else { x.className = x.className.replace("show", ""); }
-    }
-
-    const img = document.getElementById('file');
-    var htmlobject;
-
-    function getHTMLEditor(e){
-        htmlobject = e;
-        document.getElementById("w3review").value = htmlobject.innerHTML;
-        document.getElementById("htmledtr").innerHTML = "HTML Editor: " + htmlobject.id;
-        modal.style.display = "block";
-        content3.style.display = "block";
-    }
-
-    function copyTextToClipboard(text){
-        if (!text) return;
-        if (navigator.clipboard && window.isSecureContext){
-            navigator.clipboard.writeText(text).catch(function(){
-                fallbackCopyTextToClipboard(text);
-            });
-        } else {
-            fallbackCopyTextToClipboard(text);
-        }
-    }
-
-    function fallbackCopyTextToClipboard(text){
-        var textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.setAttribute("readonly", "");
-        textArea.style.position = "fixed";
-        textArea.style.opacity = "0";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try { document.execCommand("copy"); } catch (err) { }
-        document.body.removeChild(textArea);
-    }
-
-    function appendToHtmlEditor(text){
-        if (!text) return;
-        var editor = document.getElementById("w3review");
-        if (!editor) return;
-        if (editor.value && !editor.value.endsWith("\n")) editor.value += "\n";
-        editor.value += text;
-    }
-
-    function makeCodeId(){
-        var elementArray = document.getElementsByClassName("codespan");
-        let l = 0;
-        for(var i = 0; i < elementArray.length; i++) {
-            var j = Number(elementArray[i].id.replace("code", ""));
-            if (j > l){ l = j; }
-        }
-        return "code" + (l + 1);
-    }
-
-    function toolsclick(tool){
-        dropdowntoggle(false);
-        var textContent = "";
-        if (tool == 'div') textContent = "<div>\nInsert Your Div Contant...\n</div>";
-        else if (tool == 'p') textContent = "<p>Insert New Paragraph...</p>";
-        else if (tool == 'h3') textContent = "<h3>Insert A Header...</h3>";
-        else if (tool == 'list') textContent = "<ul>\n<li>\nInsert 1st List Content\n</li>\n</ul>";
-        else if (tool == 'link') textContent = "<a href='Your-URL' target='_blank'>Your Hyper-Link Text...</a>";
-        else if (tool == 'code'){
-            var j = makeCodeId();
-            textContent = '<div class="code">\n<pre>\n<span class="codespan" id="' + j + '">Insert Your Code...</span>\n</pre>\n<button class="codeButton" title="Copy Code to Clipboard" onclick="codeCopy(' + "'" + j + "')" + '"><i class="fa fa-copy"></i></button>\n</div>';
-        }
-        if (textContent != ""){
-            appendToHtmlEditor(textContent);
-            copyTextToClipboard(textContent);
-        }
-    }
-
-    function imgclick(){ dropdowntoggle(false); img.click(); }
-
-    function tableclick(){
-        dropdowntoggle();
-        var tcd = '<table class="matrx">\n<caption>Put Your Table Header..</caption>\n<tbody>';
-        var r = Number(document.getElementById("tablerow").value);
-        var c = Number(document.getElementById("tablecol").value);
-        if (r > 0 && c > 0){
-            for (var i = 0; i < r; i++){
-                var txt = '<tr>\n';
-                for (var j = 0; j < c; j++){ txt = txt + '<td>R' + i + 'C' + j + '</td>\n'; }
-                tcd = tcd + txt + '</tr>\n';
-            }
-        }
-        tcd = tcd + '</tbody></table>';
-        appendToHtmlEditor(tcd);
-        copyTextToClipboard(tcd);
-    }
-
-    function hdata(){
-        htmlobject.innerHTML = document.getElementById("w3review").value;
-        content3.style.display = "none";
-        modal.style.display = "none";
-    }
-
-    function mclose(){
-        newData = {};
-        content1.style.display = "none";
-        content2.style.display = "none";
-        content3.style.display = "none";
-        modal.style.display = "none";
-    }
-</script>
-
-            </footer>
-        </main>
+        <footer id="landing-footer" class="clearfix">
+            <script src="js/jquery.1.8.3.min.js"></script>
+            <script src="js/wow.min.js"></script>
+            <script src="js/featherlight.min.js"></script>
+            <script src="js/featherlight.gallery.min.js"></script>
+            <script src="js/jquery.enllax.min.js"></script>
+            <script src="js/jquery.scrollUp.min.js"></script>
+            <script src="js/jquery.easing.min.js"></script>
+            <script src="js/jquery.waypoints.min.js"></script>
+            <script src="js/images-loaded.min.js"></script>
+            <script src="js/lightbox.min.js"></script>
+            <script src="js/site.js"></script>
+            <script src="js/js/funcmain.js?v=20260415"></script>
+            <script src="js/mathscribe/jqmath-etc-0.4.6.min.js"></script>
+            <script src="js/js/CodeStyler.js"></script>
+        </footer>
     </div>
 </body>
 </html>

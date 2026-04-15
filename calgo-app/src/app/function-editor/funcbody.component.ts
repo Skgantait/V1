@@ -1,11 +1,11 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FuncService, FuncData, FuncResponse } from '../services/func.service';
-import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
-import { CategoryModalComponent } from '../modals/category-modal/category-modal.component';
-import { DatatypeModalComponent } from '../modals/datatype-modal/datatype-modal.component';
-import { HtmlEditorModalComponent } from '../modals/html-editor-modal/html-editor-modal.component';
-import { PromptDialogComponent } from '../modals/prompt-dialog/prompt-dialog.component';
+import { SafeHtmlPipe } from '../safe-html.pipe';
+import { CategoryModalComponent } from '../modals/category-modal.component';
+import { DatatypeModalComponent } from '../modals/datatype-modal.component';
+import { HtmlEditorModalComponent } from '../modals/html-editor-modal.component';
+import { PromptDialogComponent } from '../modals/prompt-dialog.component';
 
 @Component({
   selector: 'app-funcbody',
@@ -19,7 +19,8 @@ import { PromptDialogComponent } from '../modals/prompt-dialog/prompt-dialog.com
     PromptDialogComponent
   ],
   templateUrl: './funcbody.component.html',
-  styleUrls: ['./funcbody.component.css']
+  styleUrls: ['./funcbody.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FuncbodyComponent {
 
