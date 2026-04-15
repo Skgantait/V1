@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const searchService = require('../services/search.service');
+const { validateSearch } = require('../middleware/validators');
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', validateSearch, async (req, res) => {
   try {
     const key = (req.query.q || '').trim();
     const result = await searchService.search(key);

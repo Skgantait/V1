@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FuncService, FuncData, FuncResponse } from '../services/func.service';
+import { ToastService } from '../services/toast.service';
 import { SafeHtmlPipe } from '../safe-html.pipe';
 import { CategoryModalComponent } from '../modals/category-modal.component';
 import { DatatypeModalComponent } from '../modals/datatype-modal.component';
@@ -53,7 +54,7 @@ export class FuncbodyComponent {
 
   hidden = false;
 
-  constructor(private funcService: FuncService, private cdr: ChangeDetectorRef) {}
+  constructor(private funcService: FuncService, private cdr: ChangeDetectorRef, private toast: ToastService) {}
 
   ngOnInit() {
     const params = new URLSearchParams(window.location.search);
@@ -224,11 +225,11 @@ export class FuncbodyComponent {
     const data = this.buildPostData();
     this.funcService.insert(data).subscribe((res: FuncResponse) => {
       if (res.error) {
-        alert(res.message);
+        this.toast.error(res.message);
       } else {
         this.srlno = res.response;
         this.isUpdate = !!this.srlno;
-        alert(res.message);
+        this.toast.success(res.message);
         this.cdr.detectChanges();
       }
     });
@@ -238,10 +239,10 @@ export class FuncbodyComponent {
     const data = this.buildPostData();
     this.funcService.update(data).subscribe((res: FuncResponse) => {
       if (res.error) {
-        alert(res.message);
+        this.toast.error(res.message);
       } else {
         this.srlno = res.response;
-        alert(res.message);
+        this.toast.success(res.message);
         this.cdr.detectChanges();
       }
     });

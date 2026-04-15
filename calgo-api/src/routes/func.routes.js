@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const funcService = require('../services/func.service');
+const { validateFuncInsert, validateFuncUpdate } = require('../middleware/validators');
 
 const router = Router();
 
@@ -21,7 +22,7 @@ router.get('/:name', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validateFuncInsert, async (req, res) => {
   try {
     const result = await funcService.insert(req.body);
     res.json(result);
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/', async (req, res) => {
+router.put('/', validateFuncUpdate, async (req, res) => {
   try {
     const result = await funcService.update(req.body);
     res.json(result);

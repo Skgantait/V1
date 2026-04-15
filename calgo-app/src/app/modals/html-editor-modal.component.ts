@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FuncService, UploadResponse } from '../services/func.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-html-editor-modal',
@@ -55,7 +56,7 @@ export class HtmlEditorModalComponent {
   tableCols = '';
   dropdownOpen = false;
 
-  constructor(private funcService: FuncService) {}
+  constructor(private funcService: FuncService, private toast: ToastService) {}
 
   toolsClick(tool: string): void {
     let text = '';
@@ -105,7 +106,7 @@ export class HtmlEditorModalComponent {
     this.funcService.uploadImage(file).subscribe({
       next: (res: UploadResponse) => {
         if (res.error || !res.response?.UploadFile?.length) {
-          alert(res.message || 'Upload failed');
+          this.toast.error(res.message || 'Upload failed');
           return;
         }
         const url = res.response.UploadFile[0].url;
@@ -113,7 +114,7 @@ export class HtmlEditorModalComponent {
         const snippet = `<div class="imgcont">\n<h4>Put your Image Header..</h4>\n<hr>\n<img src="${imgPath}"></div>`;
         this.appendAndCopy(snippet);
       },
-      error: () => alert('Upload failed'),
+      error: () => this.toast.error('Upload failed'),
       complete: () => { input.value = ''; }
     });
   }
