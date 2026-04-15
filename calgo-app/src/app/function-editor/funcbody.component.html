@@ -1,0 +1,163 @@
+<!-- FUNCTION BODY - Angular version of func_body.php -->
+@if (!hidden) {
+<div class="row clearfix">
+
+  <div class="funcname">
+    <div class="section-heading">
+      <h3 (click)="openCategory()">{{ getField('main_categori', 'Category') }}</h3>
+      <h4 (click)="openPromptDesc('name_val')">{{ getField('name_val', 'name-val') }}</h4>
+      <p (click)="openPromptDesc('sort_description')">{{ getField('sort_description', 'sort-description') }}</p>
+    </div>
+  </div>
+
+  <!-- SYNTAX -->
+  <div class="funcdec">
+    <h3>SYNTAX</h3>
+    @for (i of syntaxRange; track i) {
+      <div class="funcseg">
+        <a href="javascript:" (click)="openPromptSyntax('syntax' + i)">
+          <i class="ri-arrow-drop-right-fill"></i>{{ getField('syntax' + i, 'syntax' + i) }}
+        </a>
+        <div class="funcsegdesc">
+          <p (click)="openPromptDesc('description' + i)">{{ getField('description' + i, 'description' + i) }}</p>
+        </div>
+      </div>
+    }
+    <hr>
+  </div>
+
+  <!-- INPUT ARGUMENTS -->
+  <div class="funcdec">
+    <h3>INPUT ARGUMENTS</h3>
+    @for (i of inputRange; track i) {
+      <div class="funcseg">
+        <h4 (click)="openPromptSyntax('input' + i)">
+          <i class="ri-arrow-drop-right-fill"></i>{{ getField('input' + i, 'input' + i) }}
+        </h4>
+        <h3 (click)="openDataType('input_type' + i)">Data Types: {{ getFieldRaw('input_type' + i) }}</h3>
+        <div class="funcsegdesc" (click)="openHtmlEditor('input_desc' + i)" [innerHTML]="getField('input_desc' + i, 'input-desc' + i) | safeHtml">
+        </div>
+      </div>
+    }
+    <hr>
+  </div>
+
+  <!-- OUTPUT ARGUMENTS -->
+  <div class="funcdec">
+    <h3>OUTPUT ARGUMENTS</h3>
+    @for (i of outputRange; track i) {
+      <div class="funcseg">
+        <h4 (click)="openPromptSyntax('output' + i)">
+          <i class="ri-arrow-drop-right-fill"></i>{{ getField('output' + i, 'output' + i) }}
+        </h4>
+        <h3 (click)="openDataType('output_type' + i)">Data Types: {{ getFieldRaw('output_type' + i) }}</h3>
+        <div class="funcsegdesc" (click)="openHtmlEditor('output_desc' + i)" [innerHTML]="getField('output_desc' + i, 'output-desc' + i) | safeHtml">
+        </div>
+      </div>
+    }
+    <hr>
+  </div>
+
+  <!-- EXAMPLES -->
+  <div class="funcdec">
+    <h3>EXAMPLES</h3>
+    <ol>
+      @for (i of exampleRange; track i) {
+        <li class="funcseg exmseg">
+          <h4 (click)="openPromptDesc('examples' + i)">{{ getField('examples' + i, 'examples' + i) }}</h4>
+          <div class="funcsegdesc" (click)="openHtmlEditor('ExampleDescription' + i)" [innerHTML]="getField('ExampleDescription' + i, 'ExampleDescription' + i) | safeHtml">
+          </div>
+        </li>
+      }
+    </ol>
+    <hr>
+  </div>
+
+  <!-- ALGORITHMS -->
+  <div class="funcdec">
+    <h3>ALGORITHMS</h3>
+    <div class="funcseg">
+      <div class="funcsegdesc" (click)="openHtmlEditor('algorithms')" [innerHTML]="getField('algorithms', 'algorithms') | safeHtml">
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="funcdec">
+    <h3>REFERENCES</h3>
+    <div class="funcseg">
+      <ol class="funcsegdesc">
+        @for (i of refRange; track i) {
+          <li (click)="openHtmlEditor('references' + i)" [innerHTML]="getField('references' + i, 'references' + i) | safeHtml"></li>
+        }
+      </ol>
+    </div>
+    <hr>
+  </div>
+
+  <!-- SEE ALSO -->
+  <div class="funcdec">
+    <h3>SEE ALSO</h3>
+    <ul class="seealso">
+      @for (i of linkRange; track i) {
+        <li class="see on">
+          <a href="javascript:" (click)="openPromptDesc('link' + i)">{{ getField('link' + i, 'link' + i) }}</a>
+        </li>
+      }
+    </ul>
+    <hr>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div>
+    <div class="col-3"></div>
+    <div class="col-3" id="actionbtn">
+      @if (!isUpdate) {
+        <a href="javascript:" class="button2" (click)="insertPost()">INSERT</a>
+      } @else {
+        <a href="javascript:" class="button2" (click)="updatePost()">UPDATE</a>
+      }
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ PROMPT DIALOG ============ -->
+@if (promptOpen) {
+  <app-prompt-dialog
+    [title]="promptTitle"
+    [value]="promptValue"
+    (confirm)="confirmPrompt($event)"
+    (cancel)="cancelPrompt()">
+  </app-prompt-dialog>
+}
+
+<!-- ============ MODALS ============ -->
+@if (modalOpen) {
+  @if (activeModal === 'category') {
+    <app-category-modal
+      [selected]="selectedCategory"
+      (confirm)="confirmCategory($event)"
+      (cancel)="closeModal()">
+    </app-category-modal>
+  }
+
+  @if (activeModal === 'datatype') {
+    <app-datatype-modal
+      [currentValue]="getFieldRaw(dataTypeTarget)"
+      (confirm)="confirmDataType($event)"
+      (cancel)="closeModal()">
+    </app-datatype-modal>
+  }
+
+  @if (activeModal === 'htmleditor') {
+    <app-html-editor-modal
+      [title]="htmlEditorTitle"
+      [content]="htmlEditorContent"
+      (confirm)="confirmHtmlEditor($event)"
+      (cancel)="closeModal()">
+    </app-html-editor-modal>
+  }
+}
+}

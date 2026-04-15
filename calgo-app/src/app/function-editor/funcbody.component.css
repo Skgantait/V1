@@ -1,0 +1,123 @@
+/* Funcbody modal styles */
+.fb-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9998;
+}
+
+.fb-modal, .fb-prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1e1e1e;
+  color: #ccc;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 20px;
+  z-index: 9999;
+  min-width: 350px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.fb-modal-wide {
+  width: 700px;
+}
+
+.fb-modal h3, .fb-prompt h4 {
+  margin: 0 0 10px;
+  color: #fff;
+}
+
+.fb-modal select {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 10px;
+  background: #2a2a2a;
+  color: #ccc;
+  border: 1px solid #555;
+}
+
+.fb-modal fieldset.hscroll {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.fb-modal fieldset div {
+  margin-bottom: 4px;
+}
+
+.fb-modal fieldset label {
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.fb-modal-btns, .fb-prompt-btns {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.fb-modal-btns a, .fb-prompt-btns a {
+  margin-left: 10px;
+}
+
+.fb-prompt textarea {
+  width: 100%;
+  min-height: 100px;
+  background: #2a2a2a;
+  color: #ccc;
+  border: 1px solid #555;
+  padding: 6px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.fb-dropdown-content {
+  background: #2a2a2a;
+  padding: 6px;
+  border: 1px solid #555;
+  display: inline-block;
+}
+
+.fb-dropdown-content input {
+  background: #1e1e1e;
+  color: #ccc;
+  border: 1px solid #555;
+  padding: 4px;
+}
+
+/* Toolbar */
+.ulm {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.lim {
+  display: inline-block;
+}
+
+.lim a, .dropbtn {
+  display: inline-block;
+  padding: 4px 8px;
+  background: #333;
+  color: #aaa;
+  border: 1px solid #555;
+  cursor: pointer;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.lim a:hover, .dropbtn:hover {
+  background: #444;
+  color: #fff;
+}

@@ -1,0 +1,37 @@
+<div class="search-container">
+  <div class="search-heading">
+    <span>FIND FUNCTION</span>
+  </div>
+  <div class="search-main">
+    <input type="search" id="search" name="search" pattern=".*\S.*"
+           placeholder="Find function by keyword"
+           [(ngModel)]="query"
+           (keydown.enter)="onSearch()">
+    <button class="search-btn" (click)="onSearch()">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+@if (searched) {
+  <div class="row clearfix">
+    <div class="funcname">
+      <div class="section-heading">
+        <h3>Found Result</h3>
+        <h4>We Have Found {{ resultCount }} Results For Key-Word "{{ searchedQuery }}".</h4>
+      </div>
+    </div>
+    <div class="funcdec">
+      @for (item of results; track item.name_val) {
+        <div class="funcseg">
+          <hr>
+          <div class="section-heading"><h3 style="padding-left: 15px;">{{ item.main_categori }}</h3></div>
+          <a href="javascript:void(0)" (click)="onFuncClick(item.name_val)">
+            <i class="ri-arrow-drop-right-fill"></i>{{ item.name_val }}
+          </a>
+          <div class="funcsegdesc"><p>{{ item.sort_description }}</p></div>
+        </div>
+      }
+    </div>
+  </div>
+}
